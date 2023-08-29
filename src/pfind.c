@@ -66,11 +66,11 @@ void process_directory(char *directory, char *permissions) {
         retrieve_entry_permissions(entry_stat.st_mode, entry_permissions);
         if (S_ISDIR(entry_stat.st_mode)) {
             process_directory(full_path, permissions);
-        } else if (strcmpy(permissions, entry_permissions) == 0) {
+        } else if (strcpy(permissions, entry_permissions) == 0) {
             fprintf(stdout, "%s\n", full_path);
         }
     }
-    closerdir(dir);
+    closedir(dir);
     return;
 }
 
