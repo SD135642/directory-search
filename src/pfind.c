@@ -62,7 +62,7 @@ void process_directory(char *directory, char *permissions) {
     full_path[path_len] = '\0';
     struct dirent *entry;
     struct stat entry_stat;
-    char entry_permissions[9];
+    char entry_permissions[10];
     while ((entry = readdir(dir)) != NULL) {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
             continue;
