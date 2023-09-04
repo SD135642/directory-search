@@ -28,16 +28,25 @@ void retrieve_entry_permissions(mode_t mode, char *entry_permissions) {
 void process_directory(char *directory, char *permissions) {
     char path[PATH_MAX];
     if (realpath(directory, path) == NULL) {
-        fprintf(stderr, "Error: Cannot get full path of directory '%s'. %s.\n", directory, strerror(errno));
+        fprintf(stderr,
+                "Error: Cannot get full path of directory '%s'. %s.\n",
+                directory,
+                strerror(errno));
         exit(EXIT_FAILURE);
     }
     DIR *dir;
     if ((dir = opendir(path)) == NULL) {
         if (errno == EACCES) {
-            fprintf(stderr, "Cannot open directory %s. %s.\n", path, strerror(errno));
+            fprintf(stderr,
+                    "Cannot open directory %s. %s.\n",
+                    path,
+                    strerror(errno));
             return;
         } else {
-            fprintf(stderr, "Error: Cannot open directory '%s'. %s.\n", path, strerror(errno));
+            fprintf(stderr,
+                    "Error: Cannot open directory '%s'. %s.\n",
+                    path,
+                    strerror(errno));
             exit(EXIT_FAILURE);
         }
     }
@@ -60,7 +69,10 @@ void process_directory(char *directory, char *permissions) {
         }
         strncpy(full_path + path_len, entry->d_name, PATH_MAX - path_len);
         if (lstat(full_path, &entry_stat) < 0) {
-            fprintf(stderr, "Error: Cannot lstate '%s'. %s.\n", full_path, strerror(errno));
+            fprintf(stderr,
+                    "Error: Cannot lstate '%s'. %s.\n",
+                    full_path,
+                    strerror(errno));
             exit(EXIT_FAILURE);
         }
         retrieve_entry_permissions(entry_stat.st_mode, entry_permissions);
@@ -90,7 +102,9 @@ char *validate_permissions(char *permissions) {
         }
     }
     if (strlen(permissions) != 9 || valid == 'N') {
-        fprintf(stderr, "Error: Permissions string '%s' is invalid.\n", permissions);
+        fprintf(stderr,
+                "Error: Permissions string '%s' is invalid.\n",
+                permissions);
         exit(EXIT_FAILURE);
     }
     return permissions;
@@ -100,18 +114,26 @@ char *validate_directory(char *directory) {
     char path[PATH_MAX];
     struct stat entry_stat;
     if (stat(directory, &entry_stat)) {
-        fprintf(stderr, "Error: Cannot stat '%s'. %s. \n", directory, strerror(errno));
+        fprintf(stderr,
+                "Error: Cannot stat '%s'. %s. \n",
+                directory,
+                strerror(errno));
         exit(EXIT_FAILURE);
     }
     if (!S_ISDIR(entry_stat.st_mode)) {
-        fprintf(stderr, "Error: '%s' is not a directory path. %s.\n", path, strerror(errno));
+        fprintf(stderr,
+                "Error: '%s' is not a directory path. %s.\n",
+                path,
+                strerror(errno));
         exit(EXIT_FAILURE);
     }
     return directory;
 }
 
 void print_usage(char **argv) {
-    fprintf(stdout, "Usage: %s -d <directory> -p <permissions string> [-h]\n", argv[0]);
+    fprintf(stdout,
+            "Usage: %s -d <directory> -p <permissions string> [-h]\n",
+            argv[0]);
     exit(EXIT_SUCCESS);
 }
 
@@ -120,7 +142,8 @@ void process_commandline(int argc, char **argv, char *directory, char *permissio
         print_usage(argv);
     }
     if (argc > 6) {
-        fprintf(stderr, "Error: Too many command line arguments received.\n");
+        fprintf(stderr,
+                "Error: Too many command line arguments received.\n");
         exit(EXIT_FAILURE);
     }
     int opt;
@@ -146,25 +169,33 @@ void process_commandline(int argc, char **argv, char *directory, char *permissio
                 break;
             case ':':
                 if (optopt == 'd') {
-                    fprintf(stderr, "Error: Required argument for %c <directory> not found.\n", optopt);
+                    fprintf(stderr,
+                            "Error: Required argument for %c <directory> not found.\n",
+                            optopt);
                 }
                 if (optopt == 'p') {
-                    fprintf(stderr, "Error: Required argument for %c <permissions string> not found.\n", optopt);
+                    fprintf(stderr,
+                            "Error: Required argument for %c <permissions string> not found.\n",
+                            optopt);
                 }
                 exit(EXIT_FAILURE);
                 break;
              case '?':
-                fprintf(stderr, "Error: Unknown option '-%c' received.\n", optopt);
+                fprintf(stderr,
+                        "Error: Unknown option '-%c' received.\n",
+                        optopt);
                 exit(EXIT_FAILURE);
                 break;
         }
     }
     if (p_seen == 'N') {
-        fprintf(stderr, "Error: Required argument -p <permissions string> not found.\n");
+        fprintf(stderr,
+               "Error: Required argument -p <permissions string> not found.\n");
         exit(EXIT_FAILURE);
     }
     if (d_seen == 'N') {
-        fprintf(stderr, "Error: Required argument -d <directory> not found.\n");
+        fprintf(stderr,
+                "Error: Required argument -d <directory> not found.\n");
         exit(EXIT_FAILURE);
     }
     return;
