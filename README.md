@@ -26,13 +26,7 @@ For pfind:
 
 For spfind:
 
-    spfind -d <directory> -p <permissions string> [-h]
-
-
-    -d: <directory>: Specifies the directory to search in.
-    -p: <permissions string>: Specifies the permission string to search for.
-    -h: Displays usage information.
-
+    ./spfind
 
 ### Note:
 
