@@ -20,8 +20,8 @@ For pfind:
     pfind -d <directory> -p <permissions string> [-h]
 
 
-    -d <directory>: Specifies the directory to search in.
-    -p <permissions string>: Specifies the permission string to search for.
+    -d: <directory>: Specifies the directory to search in.
+    -p: <permissions string>: Specifies the permission string to search for.
     -h: Displays usage information.
 
 For spfind:
@@ -29,8 +29,8 @@ For spfind:
     spfind -d <directory> -p <permissions string> [-h]
 
 
-    -d <directory>: Specifies the directory to search in.
-    -p <permissions string>: Specifies the permission string to search for.
+    -d: <directory>: Specifies the directory to search in.
+    -p: <permissions string>: Specifies the permission string to search for.
     -h: Displays usage information.
 
 
