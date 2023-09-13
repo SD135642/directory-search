@@ -34,11 +34,6 @@ For spfind:
     -h: Displays usage information.
 
 
-### Running the Programs:
-
-Compile the programs using the provided compilation commands.
-Run pfind or spfind from the command line with appropriate arguments.
-
 ### Note:
 
 Both programs assume that the sort command is available in the system. If it is not available, spfind will not function correctly.
