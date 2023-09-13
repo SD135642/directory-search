@@ -1,4 +1,4 @@
-# Directory-check-search
+# Directory-search
 
 This project, that consists of pfind.c and spfind.c is designed to search for files in a directory hierarchy based
 on specified permissions.
