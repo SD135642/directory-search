@@ -5,5 +5,5 @@ the files starting in the given directory, also provided by the user. First it v
 and the directory name, and then recurses into the directory and all its files.
 
 This program is designed to work in a Linux environment. To build, run the commands
-cd <repository's directory>
-make
+  cd <repository's directory>
+  make
